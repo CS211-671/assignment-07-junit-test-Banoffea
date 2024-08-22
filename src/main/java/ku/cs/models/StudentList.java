@@ -9,6 +9,7 @@ public class StudentList {
         students = new ArrayList<>();
     }
 
+
     public void addNewStudent(String id, String name) {
         id = id.trim();
         name = name.trim();
