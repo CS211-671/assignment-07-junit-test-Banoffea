@@ -1,5 +1,6 @@
 package ku.cs.models;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,19 @@ class UserTest {
         User user = new User("user01", "plain-p@ssw0rd");
         boolean actual = user.validatePassword("plain-p@ssw0rd");
         assertTrue(actual);
+    }
+
+    @Test
+    void testSetPassword(){
+        User user = new User("user01", "123");
+        user.setPassword("1234");
+        //assertEquals(BCrypt.withDefaults().hashToString(12,"1234".toCharArray()),user.getPassword());
+        // เอา 1234 ไปเข้ารหัสแล้วเทียบไม่ได้เพราะแต่ละครั้งได้ไม่ตรงกัน
+        assertTrue(user.validatePassword("1234"));
+    }
+    @Test
+    void testValidatePassword(){
+        User user = new User("user01", "123");
+        assertFalse(user.validatePassword("wrongPassword"));
     }
 }
